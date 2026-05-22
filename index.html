@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarjeta Digital - John Freddy Ortiz</title>
     
+    <meta property="og:title" content="Tarjeta Digital - John Freddy Ortiz">
+    <meta property="og:description" content="Asesor Comercial Corporativo en Berhlan y Bondi. Consulta nuestros catálogos y contáctame directamente.">
+    <meta property="og:image" content="berlhan.PNG"> <meta property="og:type" content="website">
+    
     <meta name="theme-color" content="#0f4c81">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -114,11 +118,14 @@
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             text-decoration: none;
+            cursor: pointer;
+            border: none;
             transition: transform 0.2s;
         }
 
-        .action-btn:active {
+        .action-btn:hover, .action-btn:active {
             transform: scale(0.95);
+            background: #f8fafc;
         }
 
         /* Sección de Catálogos y Enlaces */
@@ -271,9 +278,9 @@
             <a href="https://wa.me/573187342886" class="action-btn" title="WhatsApp Directo" target="_blank">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.428 1.988 13.958.963 11.32.963c-5.44 0-9.866 4.372-9.87 9.802 0 1.698.449 3.355 1.302 4.806l-.991 3.616 3.708-.973zm14.375-7.633c-.322-.16-.1.905-.443-1.066-.113-.208-.261-.316-.481-.424-.22-.108-.881-.364-1.763-.424-.11-.007-.22.044-.28.133l-.298.442c-.2.297-.582.386-.88.21-.422-.247-.872-.544-1.285-.865-.487-.378-.91-.816-1.291-1.293-.19-.238-.133-.59.108-.793l.358-.301c.105-.088.156-.226.133-.361-.054-.316-.254-1.332-.383-1.841-.059-.234-.265-.393-.507-.393-.215 0-.43.013-.64.041-.341.045-.634.256-.777.564-.325.698-.49 1.452-.49 2.213 0 1.54.582 3.02 1.63 4.14 1.144 1.22 2.651 2.05 4.3 2.39.294.06.594.04.881-.049.444-.138.777-.504.857-.963.095-.54.193-1.4.193-1.402.002-.119-.053-.232-.147-.307z"/></svg>
             </a>
-            <a href="mailto:john.ortiz@berhlan.com" class="action-btn" title="Correo Electrónico">
+            <button onclick="enviarCorreo()" class="action-btn" title="Enviar Correo Electrónico">
                 <span style="font-size: 1.4rem;">✉️</span>
-            </a>
+            </button>
         </div>
 
         <div class="links-section">
@@ -339,79 +346,4 @@
                 </div>
                 <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
                 <div class="geo-indicator">
-                    📍 Ubicación del cliente integrada automáticamente
-                </div>
-            </form>
-        </div>
-
-        <footer>
-            Hecha por <a href="#">Vibras Positivas HM</a> © 2026<br>
-            Todos los derechos reservados.
-        </footer>
-    </div>
-
-    <script>
-        // Validación estricta de caducidad (22/05/2027)
-        const expirationDate = new Date('2027-05-22T23:59:59');
-        const currentDate = new Date();
-
-        if (currentDate > expirationDate) {
-            document.getElementById('expired-screen').style.display = 'flex';
-        }
-
-        // Variable global para almacenar coordenadas geográficas
-        let userLocationStr = "No proporcionada";
-
-        // Captura automática de geolocalización al iniciar la aplicación
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    userLocationStr = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
-                },
-                (error) => {
-                    userLocationStr = "Permiso de ubicación denegado por el usuario.";
-                }
-            );
-        }
-
-        // Manejo del envío del formulario hacia WhatsApp
-        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('clientName').value;
-            const phone = document.getElementById('clientPhone').value;
-            const obs = document.getElementById('clientObservations').value;
-
-            // Obtener fecha y hora en tiempo real de Colombia
-            const optionsDate = { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit' };
-            const optionsTime = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            
-            const colDate = new Intl.DateTimeFormat('es-CO', optionsDate).format(new Date());
-            const colTime = new Intl.DateTimeFormat('es-CO', optionsTime).format(new Date());
-
-            // Estructura del mensaje de texto
-            const textMessage = `*NUEVA CONSULTA - TARJETA DIGITAL*\n\n` +
-                                `👤 *Nombre:* ${name}\n` +
-                                `📱 *Celular:* ${phone}\n` +
-                                `📝 *Consulta:* ${obs}\n\n` +
-                                `📅 *Fecha:* ${colDate}\n` +
-                                `⏰ *Hora:* ${colTime}\n` +
-                                `📍 *Ubicación del Cliente:* ${userLocationStr}`;
-
-            // Codificar texto para la URL
-            const urlEncoded = encodeURIComponent(textMessage);
-            const whatsappUrl = `https://wa.me/573187342886?text=${urlEncoded}`;
-
-            // Redirección directa
-            window.open(whatsappUrl, '_blank');
-        });
-
-        // Registrar Service Worker integrado para soporte PWA offline básico
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7fSk7');
-            });
-        }
-    </script>
-</body>
-</html>
+                    📍
